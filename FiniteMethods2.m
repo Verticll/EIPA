@@ -6,7 +6,8 @@ V = zeros(nx,ny);
 G = sparse(nx*ny,nx*ny);
 
 
-SidesToZero = 1;
+% Create V 
+%SidesToZero = 1;
 % for k  = 1:ni
 %     for i = 1:nx
 %         for j = 1:ny...
@@ -34,19 +35,20 @@ SidesToZero = 1;
 % end
 % 
 % surf(V')
-% 
+
 %Create G
-    for i = 1:49:ni
-        for j = 1:49:ni...
-            if i == 1 || j == 1 || i == 2500 || j == 2500 
-                G(i,j) = 0;
-            elseif i == j
-                G(i,j) = 1;
-            else
-                G(i,j) = (G(i+1,j)+G(i-1,j)+G(i,j+1)+G(i,j-1))/4;
-            end
-        end
-    end
+     for i = 1:ny
+         for j = 1:nx...
+                 n = j + (i - 1) * ny;
+             if i == 1 || j == 1 || i == 2500 || j == 2500 
+                 G(n,n) = 1;
+             elseif i == j
+                 G(n,n) = 1;
+             else
+                 G(n,n) = 1;
+             end
+         end
+     end
 
 figure('name','Matrix')
 spy(G)
