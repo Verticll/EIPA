@@ -6,8 +6,8 @@ V = zeros(nx,ny);
 G = sparse(nx*ny,nx*ny);
 
 
-% Create V 
-%SidesToZero = 1;
+%Create V 
+% SidesToZero = 1;
 % for k  = 1:ni
 %     for i = 1:nx
 %         for j = 1:ny...
@@ -33,19 +33,27 @@ G = sparse(nx*ny,nx*ny);
 %         end
 %     end
 % end
-% 
-% surf(V')
+
+surf(V')
+%                nxm = V(i-1,j);
+%                nxp = V(i+1,j);
+%               nym = V(i,j-1);
+%               nyp = V(i,j+1);
+%               (nxp - 2*n + nxm)/del2 + nyp - 2 * n + nya
 
 %Create G
      for i = 1:ny
          for j = 1:nx...
                  n = j + (i - 1) * ny;
+
              if i == 1 || j == 1 || i == 2500 || j == 2500 
-                 G(n,n) = 1;
+                 G(n,n) = -4;
              elseif i == j
-                 G(n,n) = 1;
+                 G(n,n) = -4;
              else
-                 G(n,n) = 1;
+                 G(n,n) = -3;
+                 G(n,n-1) = 4;
+                 G(n-1,n) = 4;
              end
          end
      end
